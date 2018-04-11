@@ -1,13 +1,19 @@
 # 1.首先要准备LAMP环境。
 
-##（1）安装php
+## （1）安装php
 
 Zabbix 对PHP的要求最低为5.4，故需要将PHP升级到5.4以上
+
 可以在线安装升级
+
 rpm -ivh http://repo.webtatic.com/yum/el6/latest.rpm
+
 yum install php56w php56w-gd php56w-mysql php56w-bcmath php56w-mbstring php56w-xml php56w-ldap
+
 #或直接下载RPM包安装，前提需要先将老版本PHP卸载干净
+
 #卸载
+
 rpm -e --nodeps php-pgsql-5.3.3-49.el6.x86_64 
 rpm -e --nodeps php-odbc-5.3.3-49.el6.x86_64
 rpm -e --nodeps php-xmlrpc-5.3.3-49.el6.x86_64 
@@ -22,7 +28,9 @@ rpm -e --nodeps php-5.3.3-49.el6.x86_64
 rpm -e --nodeps php-cli-5.3.3-49.el6.x86_64
 rpm -e --nodeps php-ldap-5.3.3-49.el6.x86_64
 rpm -e --nodeps php-xml-5.3.3-49.el6.x86_64
+
 安装
+
 rpm -ivh t1lib-5.1.2-6.el6_2.1.x86_64.rpm 
 rpm -ivh php56w-common-5.6.33-1.w6.x86_64.rpm 
 rpm -ivh php56w-cli-5.6.33-1.w6.x86_64.rpm 
@@ -34,10 +42,14 @@ rpm -ivh php56w-mbstring-5.6.33-1.w6.x86_64.rpm
 rpm -ivh php56w-mysql-5.6.33-1.w6.x86_64.rpm 
 rpm -ivh php56w-pdo-5.6.33-1.w6.x86_64.rpm 
 rpm -ivh php56w-xml-5.6.33-1.w6.x86_64.rpm 
+
 查看PHP版本 
+
 php -v
 5.6.33
+
 修改PHP参数，不修改参数会在安装界面报参数错误
+
 vim /etc/php.ini
 date.timezone = Asia/Shanghai
 post_max_size = 32M
@@ -47,15 +59,20 @@ always_populate_raw_post_data = -1
 /usr/bin/php &  #启动服务
 
 ##（2）安装mysql
+
 系统安装的时候可以提前把MySQL安装上
+
 或者在线下载安装
+
 rpm -ivh http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
 yum install -y mysql-server mysql-devel
 useradd mysql -s /sbin/nologin -M mysql  #创建mysql用户
 mkdir -p /data/mysql #创建数据目录
 chown -R mysql:mysql /data/mysql/
 sed -i 's#^datadir=#datadir=/data/mysql#' /etc/init.d/mysqld
+
 #启动MySQL服务
+
 service mysqld start  
 chkconfig mysqld on
 
@@ -84,7 +101,7 @@ mysql> show databases;
 | zabbix            |   
 +--------------------+
 
-##（4）安装apache
+## （4）安装apache
 
 yum install httpd libxml2-devel net-snmp-devel libcurl-devel
 
