@@ -42,7 +42,11 @@ rpm -e --nodeps php-ldap-5.3.3-49.el6.x86_64
 
 rpm -e --nodeps php-xml-5.3.3-49.el6.x86_64
 
-安装
+安装 PHP rpm包（注意安装顺序）
+
+rpm -ivh libXpm-3.5.10-2.el6.x86_64.rpm
+
+rpm -ivh gcc 
 
 rpm -ivh t1lib-5.1.2-6.el6_2.1.x86_64.rpm 
 
@@ -72,7 +76,7 @@ php -v
 
 5.6.33
 
-修改PHP参数，不修改参数会在安装界面报参数错误
+修改PHP参数，不修改参数会在安装界面报参数错误（注意：前面；号要去掉）
 
 vim /etc/php.ini
 
@@ -98,7 +102,7 @@ rpm -ivh http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
 
 yum install -y mysql-server mysql-devel
 
-useradd mysql -s /sbin/nologin -M mysql  #创建mysql用户
+useradd mysql  #创建mysql用户
 
 mkdir -p /data/mysql #创建数据目录
 
@@ -106,19 +110,13 @@ chown -R mysql:mysql /data/mysql/
 
 sed -i 's#^datadir=#datadir=/data/mysql#' /etc/init.d/mysqld
 
-#启动MySQL服务
-
-service mysqld start  
+service mysqld start  #测试启动MySQL服务
 
 chkconfig mysqld on
 
-初始化mysql
+mysql_install_db  --user=mysql --data=/data/mysql #初始化mysql
 
-mysql_install_db  --user=mysql --data=/data/mysql
-
-启动mysql
-
-service mysqld start
+service mysqld start  #启动mysql
 
 chkconfig mysqld on
 
@@ -153,7 +151,7 @@ groupadd zabbix
 
 useradd -g zabbix -u 201 -m zabbix
 
-安装包在线下载，内网安装需要离线下载并上传服务器
+安装包可在线下载，内网安装需要离线下载并上传服务器
 
 wget http://sourceforge.net/projects/zabbix/files/ZABBIX%20Latest%20Stable/3.0.3/zabbix-3.0.3.tar.gz
 
@@ -167,7 +165,7 @@ make &&make install
 
 报错1：configure: error: Unable to use libpcre (libpcre check failed)
 
-yum -y install pcre* 安装即可解决
+yum -y install pcre* 安装即可解决（64位Linux需安装x86版本）
 
 错误2：configure: error: Not found mysqlclient library
 
@@ -199,7 +197,7 @@ DBUser=zabbix #
 
 DBPassword=zabbix #
 
-ListenIP=192.168.10.10  zabbix server ip地址 #
+ListenIP=192.168.10.10  # zabbix server ip地址
 
 StartIPMIPollers=10
 
@@ -276,3 +274,9 @@ chkconfig httpd on
 ## (9)在web页面配置zabbixserver
 
 用浏览器访问 http://192.168.190.133/zabbix/
+
+问题1
+
+WEB 页面报错 At least one of MySQL, SQL, Oracle or IBM DB2 should be supported.
+
+由RPM包 php56w-mysql-5.6.33-1.w6.x86_64 导致，需要重新安装
