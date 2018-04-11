@@ -88,7 +88,7 @@ always_populate_raw_post_data = -1
 
 /usr/bin/php &  #启动服务
 
-##（2）安装mysql
+## （2）安装mysql
 
 系统安装的时候可以提前把MySQL安装上
 
