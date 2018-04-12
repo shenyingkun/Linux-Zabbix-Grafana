@@ -280,3 +280,15 @@ chkconfig httpd on
 WEB 页面报错 At least one of MySQL, SQL, Oracle or IBM DB2 should be supported.
 
 由RPM包 php56w-mysql-5.6.33-1.w6.x86_64 导致，需要重新安装
+
+问题2
+
+zabbix在安装后，在主页面一直提示：zabbix server is not running the information displayed may not be current.
+
+将文件/etc/zabbix/zabbix_server.conf中的ListenIP=127.0.0.1注释掉即可！
+
+问题3
+
+安装后提示：Get value from agent failed: cannot connect to [[127.0.0.1]:10050]: [111] Connection refused
+
+主机配置选项 agent 配置错误
