@@ -7,7 +7,6 @@ Zabbix 对PHP的要求最低为5.4，故需要将PHP升级到5.4以上
 可以在线安装升级
 
     rpm -ivh http://repo.webtatic.com/yum/el6/latest.rpm
-
     yum install php56w php56w-gd php56w-mysql php56w-bcmath php56w-mbstring php56w-xml php56w-ldap
 
 或直接下载RPM包安装，前提需要先将老版本PHP卸载干净
@@ -17,78 +16,48 @@ Zabbix 对PHP的要求最低为5.4，故需要将PHP升级到5.4以上
     rpm -e --nodeps php-pgsql-5.3.3-49.el6.x86_64
     rpm -e --nodeps php-odbc-5.3.3-49.el6.x86_64
     rpm -e --nodeps php-xmlrpc-5.3.3-49.el6.x86_64 
-
-rpm -e --nodeps php-common-5.3.3-49.el6.x86_64
-
-rpm -e --nodeps php-pdo-5.3.3-49.el6.x86_64 
-
-rpm -e --nodeps php-pear-1.9.4-5.el6.noarch
-
-rpm -e --nodeps php-mysql-5.3.3-49.el6.x86_64 
-
-rpm -e --nodeps php-soap-5.3.3-49.el6.x86_64
-
-rpm -e --nodeps php-gd-5.3.3-49.el6.x86_64
-
-rpm -e --nodeps php-pecl-memcache-3.0.5-4.el6.x86_64
-
-rpm -e --nodeps php-5.3.3-49.el6.x86_64
-
-rpm -e --nodeps php-cli-5.3.3-49.el6.x86_64
-
-rpm -e --nodeps php-ldap-5.3.3-49.el6.x86_64
-
-rpm -e --nodeps php-xml-5.3.3-49.el6.x86_64
+    rpm -e --nodeps php-common-5.3.3-49.el6.x86_64
+    rpm -e --nodeps php-pdo-5.3.3-49.el6.x86_64
+    rpm -e --nodeps php-pear-1.9.4-5.el6.noarch
+    rpm -e --nodeps php-mysql-5.3.3-49.el6.x86_64 
+    rpm -e --nodeps php-soap-5.3.3-49.el6.x86_64
+    rpm -e --nodeps php-gd-5.3.3-49.el6.x86_64
+    rpm -e --nodeps php-pecl-memcache-3.0.5-4.el6.x86_64
+    rpm -e --nodeps php-5.3.3-49.el6.x86_64
+    rpm -e --nodeps php-cli-5.3.3-49.el6.x86_64
+    rpm -e --nodeps php-ldap-5.3.3-49.el6.x86_64
+    rpm -e --nodeps php-xml-5.3.3-49.el6.x86_64
 
 安装 PHP rpm包（注意安装顺序）
 
-rpm -ivh libXpm-3.5.10-2.el6.x86_64.rpm
-
-rpm -ivh gcc 
-
-rpm -ivh t1lib-5.1.2-6.el6_2.1.x86_64.rpm 
-
-rpm -ivh php56w-common-5.6.33-1.w6.x86_64.rpm 
-
-rpm -ivh php56w-cli-5.6.33-1.w6.x86_64.rpm 
-
-rpm -ivh php56w-5.6.33-1.w6.x86_64.rpm 
-
-rpm -ivh php56w-bcmath-5.6.33-1.w6.x86_64.rpm
-
-rpm -ivh php56w-gd-5.6.33-1.w6.x86_64.rpm 
-
-rpm -ivh php56w-ldap-5.6.33-1.w6.x86_64.rpm 
-
-rpm -ivh php56w-mbstring-5.6.33-1.w6.x86_64.rpm 
-
-rpm -ivh php56w-mysql-5.6.33-1.w6.x86_64.rpm 
-
-rpm -ivh php56w-pdo-5.6.33-1.w6.x86_64.rpm 
-
-rpm -ivh php56w-xml-5.6.33-1.w6.x86_64.rpm 
+    rpm -ivh libXpm-3.5.10-2.el6.x86_64.rpm
+    rpm -ivh gcc 
+    rpm -ivh t1lib-5.1.2-6.el6_2.1.x86_64.rpm 
+    rpm -ivh php56w-common-5.6.33-1.w6.x86_64.rpm 
+    rpm -ivh php56w-cli-5.6.33-1.w6.x86_64.rpm 
+    rpm -ivh php56w-5.6.33-1.w6.x86_64.rpm 
+    rpm -ivh php56w-bcmath-5.6.33-1.w6.x86_64.rpm
+    rpm -ivh php56w-gd-5.6.33-1.w6.x86_64.rpm 
+    rpm -ivh php56w-ldap-5.6.33-1.w6.x86_64.rpm 
+    rpm -ivh php56w-mbstring-5.6.33-1.w6.x86_64.rpm 
+    rpm -ivh php56w-mysql-5.6.33-1.w6.x86_64.rpm 
+    rpm -ivh php56w-pdo-5.6.33-1.w6.x86_64.rpm 
+    rpm -ivh php56w-xml-5.6.33-1.w6.x86_64.rpm 
 
 查看PHP版本 
 
-php -v
-
-5.6.33
+    php -v
+    5.6.33
 
 修改PHP参数，不修改参数会在安装界面报参数错误（注意：前面；号要去掉）
 
-vim /etc/php.ini
-
-date.timezone = Asia/Shanghai
-
-post_max_size = 32M
-
-max_execution_time = 300
-
-max_input_time = 300
-
-always_populate_raw_post_data = -1
-
-/usr/bin/php &  #启动服务
+    vim /etc/php.ini
+    date.timezone = Asia/Shanghai
+    post_max_size = 32M
+    max_execution_time = 300
+    max_input_time = 300
+    always_populate_raw_post_data = -1
+    /usr/bin/php &  #启动服务
 
 ## （2）安装mysql
 
@@ -96,70 +65,50 @@ always_populate_raw_post_data = -1
 
 或者在线下载安装
 
-rpm -ivh http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
-
-yum install -y mysql-server mysql-devel
-
-useradd mysql  #创建mysql用户
-
-mkdir -p /data/mysql #创建数据目录
-
-chown -R mysql:mysql /data/mysql/
-
-sed -i 's#^datadir=#datadir=/data/mysql#' /etc/init.d/mysqld
-
-service mysqld start  #测试启动MySQL服务
-
-chkconfig mysqld on
-
-mysql_install_db  --user=mysql --data=/data/mysql #初始化mysql
-
-service mysqld start  #启动mysql
-
-chkconfig mysqld on
+    rpm -ivh http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
+    yum install -y mysql-server mysql-devel
+    useradd mysql  #创建mysql用户
+    mkdir -p /data/mysql #创建数据目录
+    chown -R mysql:mysql /data/mysql/
+    sed -i 's#^datadir=#datadir=/data/mysql#' /etc/init.d/mysqld
+    service mysqld start  #测试启动MySQL服务
+    chkconfig mysqld on
+    mysql_install_db  --user=mysql --data=/data/mysql #初始化mysql
+    service mysqld start  #启动mysql
+    chkconfig mysqld on
 
 ## (3)在mysql中创建zabbix所需要的库和用户
 
-mysql -uroot -p
-
-mysql> CREATE DATABASE zabbix CHARACTER SET utf8 COLLATE utf8_bin;
-
-mysql> GRANT ALL PRIVILEGES ON zabbix.* TO zabbix@localhost IDENTIFIED BY 'zabbix';
-
-mysql> flush privileges; 
-
-mysql> show databases; 
-
-+--------------------+   
-| Database          |   
-+--------------------+   
-| information_schema |   
-| mysql              |   
-| performance_schema |   
-| zabbix            |   
-+--------------------+
+    mysql -uroot -p
+    mysql> CREATE DATABASE zabbix CHARACTER SET utf8 COLLATE utf8_bin;
+    mysql> GRANT ALL PRIVILEGES ON zabbix.* TO zabbix@localhost IDENTIFIED BY 'zabbix';
+    mysql> flush privileges; 
+    mysql> show databases; 
+    +--------------------+   
+    | Database          |   
+    +--------------------+   
+    | information_schema |   
+    | mysql              |   
+    | performance_schema |   
+    | zabbix            |   
+    +--------------------+
 
 ## （4）安装apache
 
-yum install httpd libxml2-devel net-snmp-devel libcurl-devel
+    yum install httpd libxml2-devel net-snmp-devel libcurl-devel
 
 ## (5)安装zabbix
 
-groupadd zabbix
-
-useradd -g zabbix -u 201 -m zabbix
+    groupadd zabbix
+    useradd -g zabbix -u 201 -m zabbix
 
 安装包可在线下载，内网安装需要离线下载并上传服务器
 
-wget http://sourceforge.net/projects/zabbix/files/ZABBIX%20Latest%20Stable/3.0.3/zabbix-3.0.3.tar.gz
-
-tar zxvf zabbix-3.0.3.tar.gz
-
-cd zabbix-3.0.3
-
-./configure --prefix=/usr/local/zabbix --sysconfdir=/etc/zabbix/ --enable-server --enable-agent --with-net-snmp --with-libcurl --with-mysql --with-libxml2
-
-make &&make install
+    wget http://sourceforge.net/projects/zabbix/files/ZABBIX%20Latest%20Stable/3.0.3/zabbix-3.0.3.tar.gz
+    tar zxvf zabbix-3.0.3.tar.gz
+    cd zabbix-3.0.3
+    ./configure --prefix=/usr/local/zabbix --sysconfdir=/etc/zabbix/ --enable-server --enable-agent --with-net-snmp --with-libcurl --with-mysql --with-libxml2
+    make &&make install
 
 报错1：configure: error: Unable to use libpcre (libpcre check failed)
 
@@ -175,99 +124,59 @@ yum install net-snmp-devel 安装即可解决
 
 ## (6)按顺序导入zabbix库
 
-cd  /root/zabbix-3.0.3/database/mysql
-
-mysql -uzabbix -pzabbix zabbix < database/mysql/schema.sql
-
-mysql -uzabbix -pzabbix zabbix < database/mysql/images.sql
-
-mysql -uzabbix -pzabbix zabbix < database/mysql/data.sql
+    cd  /root/zabbix-3.0.3/database/mysql
+    mysql -uzabbix -pzabbix zabbix < database/mysql/schema.sql
+    mysql -uzabbix -pzabbix zabbix < database/mysql/images.sql
+    mysql -uzabbix -pzabbix zabbix < database/mysql/data.sql
 
 ## （7）配置zabbix_server
 
-vim /etc/zabbix/zabbix_server.conf
-
-DBHost=localhost  #数据库ip地址
-
-DBName=zabbix #
-
-DBUser=zabbix #
-
-DBPassword=zabbix #
-
-ListenIP=192.168.10.10  # zabbix server ip地址
-
-StartIPMIPollers=10
-
-StartPollersUnreachable=10
-
-StartTrappers=10
-
-StartPingers=10
-
-StartDiscoverers=10
-
-CacheSize=256M
-
-StartDBSyncers=40
-
-HistoryCacheSize=128M
-
-TrendCacheSize=128M
-
-HistoryTextCacheSize=128M
-
-ValueCacheSize=128M
-
-Timeout=30
-
-AlertScriptsPath=/etc/zabbix/alertscripts      #//修改
-
-ExternalScripts=/etc/zabbix/externalscripts    #//修改
-
-LogSlowQueries=10000
-
-StartProxyPollers=50
+    vim /etc/zabbix/zabbix_server.conf
+    DBHost=localhost  #数据库ip地址
+    DBName=zabbix #
+    DBUser=zabbix #
+    DBPassword=zabbix #
+    ListenIP=192.168.10.10  # zabbix server ip地址
+    StartIPMIPollers=10
+    StartPollersUnreachable=10
+    StartTrappers=10
+    StartPingers=10
+    StartDiscoverers=10
+    CacheSize=256M
+    StartDBSyncers=40
+    HistoryCacheSize=128M
+    TrendCacheSize=128M
+    HistoryTextCacheSize=128M
+    ValueCacheSize=128M
+    Timeout=30
+    AlertScriptsPath=/etc/zabbix/alertscripts      #//修改
+    ExternalScripts=/etc/zabbix/externalscripts    #//修改
+    LogSlowQueries=10000
+    StartProxyPollers=50
 
 创建zabbix所需要的脚本目录
 
-mkdir /etc/zabbix/alertscripts
-
-mkdir /etc/zabbix/externalscripts
-
-ln -s /usr/local/zabbix/sbin/* /usr/sbin/
-
-cp /home/sources/zabbix-3.0.3/misc/init.d/Fedora/core/zabbix_* /etc/init.d/  #复制服务启动脚本
-
-chmod +x /etc/init.d/zabbix_*
-
-sed -i "s@BASEDIR=/usr/local@BASEDIR=/usr/local/zabbix@g" /etc/init.d/zabbix_server
+    mkdir /etc/zabbix/alertscripts
+    mkdir /etc/zabbix/externalscripts
+    ln -s /usr/local/zabbix/sbin/* /usr/sbin/
+    cp /home/sources/zabbix-3.0.3/misc/init.d/Fedora/core/zabbix_* /etc/init.d/  #复制服务启动脚本
+    chmod +x /etc/init.d/zabbix_*
+    sed -i "s@BASEDIR=/usr/local@BASEDIR=/usr/local/zabbix@g" /etc/init.d/zabbix_server
 
 ## （8）配置web
 
-vim /etc/httpd/conf/httpd.conf
-
-ServerName 127.0.0.1
-
-DocumentRoot  "/var/www/html"
-
-mkdir -p /var/www/html/zabbix
-
-cp -r /home/sources/zabbix-3.0.3/frontends/php/* /var/www/html/zabbix/
-
-chown -R apache.apache /var/www/html/zabbix/
-
-chkconfig zabbix_server on
-
-chkconfig httpd on
-
-chkconfig mysqld on
-
-/etc/init.d/zabbix_server start
-
-service httpd restart
-
-chkconfig httpd on
+    vim /etc/httpd/conf/httpd.conf
+    ServerName 127.0.0.1
+    DocumentRoot  "/var/www/html"
+    mkdir -p /var/www/html/zabbix
+    cp -r /home/sources/zabbix-3.0.3/frontends/php/* /var/www/html/zabbix/
+    chown -R apache.apache /var/www/html/zabbix/
+    chkconfig zabbix_server on
+    chkconfig httpd on
+    chkconfig mysqld on
+    /etc/init.d/zabbix_server start
+    service httpd restart
+    chkconfig httpd on
 
 ## (9)在web页面配置zabbixserver
 
