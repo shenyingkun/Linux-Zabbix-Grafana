@@ -6,19 +6,17 @@ Zabbix 对PHP的要求最低为5.4，故需要将PHP升级到5.4以上
 
 可以在线安装升级
 
-rpm -ivh http://repo.webtatic.com/yum/el6/latest.rpm
+    rpm -ivh http://repo.webtatic.com/yum/el6/latest.rpm
 
-yum install php56w php56w-gd php56w-mysql php56w-bcmath php56w-mbstring php56w-xml php56w-ldap
+    yum install php56w php56w-gd php56w-mysql php56w-bcmath php56w-mbstring php56w-xml php56w-ldap
 
 或直接下载RPM包安装，前提需要先将老版本PHP卸载干净
 
 卸载
 
-rpm -e --nodeps php-pgsql-5.3.3-49.el6.x86_64 
-
-rpm -e --nodeps php-odbc-5.3.3-49.el6.x86_64
-
-rpm -e --nodeps php-xmlrpc-5.3.3-49.el6.x86_64 
+    rpm -e --nodeps php-pgsql-5.3.3-49.el6.x86_64
+    rpm -e --nodeps php-odbc-5.3.3-49.el6.x86_64
+    rpm -e --nodeps php-xmlrpc-5.3.3-49.el6.x86_64 
 
 rpm -e --nodeps php-common-5.3.3-49.el6.x86_64
 
