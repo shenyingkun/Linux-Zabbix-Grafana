@@ -1,6 +1,10 @@
 # Zabbix内网安装部署
 
-## （1）安装php
+## （1）安装apache
+
+    yum install httpd libxml2-devel net-snmp-devel libcurl-devel
+
+## （2）安装php
 
 Zabbix 对PHP的要求最低为5.4，故需要将PHP升级到5.4以上
 
@@ -31,7 +35,8 @@ Zabbix 对PHP的要求最低为5.4，故需要将PHP升级到5.4以上
 安装 PHP rpm包（注意安装顺序）
 
     rpm -ivh libXpm-3.5.10-2.el6.x86_64.rpm
-    rpm -ivh gcc 
+    yum install -y  gcc
+    yum install -y httpd
     rpm -ivh t1lib-5.1.2-6.el6_2.1.x86_64.rpm 
     rpm -ivh php56w-common-5.6.33-1.w6.x86_64.rpm 
     rpm -ivh php56w-cli-5.6.33-1.w6.x86_64.rpm 
@@ -52,14 +57,14 @@ Zabbix 对PHP的要求最低为5.4，故需要将PHP升级到5.4以上
 修改PHP参数，不修改参数会在安装界面报参数错误（注意：前面；号要去掉）
 
     vim /etc/php.ini
-    date.timezone = Asia/Shanghai
+    date.timezone = Asia/Shanghai #去掉分号
     post_max_size = 32M
     max_execution_time = 300
     max_input_time = 300
-    always_populate_raw_post_data = -1
+    always_populate_raw_post_data = -1 #去掉分号
     /usr/bin/php &  #启动服务
 
-## （2）安装mysql
+## （3）安装mysql
 
 系统安装的时候可以提前把MySQL安装上
 
@@ -72,12 +77,12 @@ Zabbix 对PHP的要求最低为5.4，故需要将PHP升级到5.4以上
     chown -R mysql:mysql /data/mysql/
     sed -i 's#^datadir=#datadir=/data/mysql#' /etc/init.d/mysqld
     service mysqld start  #测试启动MySQL服务
-    chkconfig mysqld on
+    service mysqld stop 
     mysql_install_db  --user=mysql --data=/data/mysql #初始化mysql
     service mysqld start  #启动mysql
     chkconfig mysqld on
 
-## (3)在mysql中创建zabbix所需要的库和用户
+## (4) 在mysql中创建zabbix所需要的库和用户
 
     mysql -uroot -p
     mysql> CREATE DATABASE zabbix CHARACTER SET utf8 COLLATE utf8_bin;
@@ -93,11 +98,7 @@ Zabbix 对PHP的要求最低为5.4，故需要将PHP升级到5.4以上
     | zabbix            |   
     +--------------------+
 
-## （4）安装apache
-
-    yum install httpd libxml2-devel net-snmp-devel libcurl-devel
-
-## (5)安装zabbix
+## (5) 安装zabbix
 
     groupadd zabbix
     useradd -g zabbix -u 201 -m zabbix
@@ -112,7 +113,10 @@ Zabbix 对PHP的要求最低为5.4，故需要将PHP升级到5.4以上
 
 报错1：configure: error: Unable to use libpcre (libpcre check failed)
 
-yum -y install pcre* 安装即可解决（64位Linux需安装x86版本）
+    yum -y install pcre* 安装即可解决（64位Linux需安装x86版本）
+    或
+    rpm -ivh --nodeps libevent-devel-1.4.13-4.el6.x86_64.rpm
+    rpm -ivh --nodeps libevent-headers-1.4.13-4.el6.noarch
 
 错误2：configure: error: Not found mysqlclient library
 
@@ -132,11 +136,11 @@ yum install net-snmp-devel 安装即可解决
 ## （7）配置zabbix_server
 
     vim /etc/zabbix/zabbix_server.conf
-    DBHost=localhost  #数据库ip地址
-    DBName=zabbix #
-    DBUser=zabbix #
-    DBPassword=zabbix #
-    ListenIP=192.168.10.10  # zabbix server ip地址
+    DBHost=localhost  #//数据库ip地址
+    DBName=zabbix #//
+    DBUser=zabbix #//
+    DBPassword=zabbix #//
+    ListenIP=192.168.10.10  #// zabbix server ip地址
     StartIPMIPollers=10
     StartPollersUnreachable=10
     StartTrappers=10
@@ -162,21 +166,25 @@ yum install net-snmp-devel 安装即可解决
     cp /home/sources/zabbix-3.0.3/misc/init.d/Fedora/core/zabbix_* /etc/init.d/  #复制服务启动脚本
     chmod +x /etc/init.d/zabbix_*
     sed -i "s@BASEDIR=/usr/local@BASEDIR=/usr/local/zabbix@g" /etc/init.d/zabbix_server
-
+    sed -i "s@BASEDIR=/usr/local@BASEDIR=/usr/local/zabbix@g" /etc/init.d/zabbix_agent
 ## （8）配置web
 
     vim /etc/httpd/conf/httpd.conf
+    添加
     ServerName 127.0.0.1
     DocumentRoot  "/var/www/html"
+    
+    创建目录
     mkdir -p /var/www/html/zabbix
     cp -r /home/sources/zabbix-3.0.3/frontends/php/* /var/www/html/zabbix/
     chown -R apache.apache /var/www/html/zabbix/
     chkconfig zabbix_server on
-    chkconfig httpd on
-    chkconfig mysqld on
     /etc/init.d/zabbix_server start
+    /etc/init.d/zabbix_agent start
     service httpd restart
     chkconfig httpd on
+    chkconfig zabbix_server on
+    chkconfig zabbix_agent on
 
 ## (9)在web页面配置zabbixserver
 
