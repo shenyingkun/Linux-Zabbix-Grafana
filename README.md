@@ -1,6 +1,6 @@
 ![Zabbix]( https://github.com/shenyingkun/Linux-Zabbix-Grafana/blob/master/Zabbix.png )
 
-# ZABBIX  GRAFANA
+# ZABBIX  Grafana
 
 ## 本项目测试为Zabbix运维监控系统，实现内网的Zabbix+Grafana安装部署
 
