@@ -2,8 +2,9 @@
 
    1) 创建监控脚本 chk_mysql.sh
    
-          cd  /usr/local/zabbix/share/zabbix/alertscripts
-          touch chk_mysql.sh
+    cd  /usr/local/zabbix/share/zabbix/alertscripts
+    touch chk_mysql.sh
+    
    2）添加脚本内容
    
     #!/bin/bash
