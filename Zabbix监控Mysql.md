@@ -8,27 +8,20 @@
    2.添加脚本内容
    
     #!/bin/bash
-
     # 用户名
     MYSQL_USER='zabbix'
- 
     # 密码
     MYSQL_PWD='zabbix'
- 
     # 主机地址/IP
     MYSQL_HOST='127.0.0.1'
- 
     # 端口
     MYSQL_PORT='3306'
- 
     # 数据连接
     MYSQL_CONN="/usr/bin/mysqladmin -u${MYSQL_USER} -p${MYSQL_PWD} -h${MYSQL_HOST} -P${MYSQL_PORT}"
- 
     # 参数是否正确
     if [ $# -ne "1" ];then 
         echo "arg error!" 
     fi 
- 
     # 获取数据
     case $1 in 
       Uptime) 
@@ -78,8 +71,7 @@
     Com_begin) 
         result=`${MYSQL_CONN} extended-status |grep -w "Com_begin"|cut -d"|" -f3` 
                 echo $result 
-                ;; 
-                        
+                ;;                 
         *) 
         echo "Usage:$0(Uptime|Com_update|Slow_queries|Com_select|Com_rollback|Questions|Com_insert|Com_delete|Com_commit|Bytes_sent|Bytes_received|Com_begin)" 
         ;; 
@@ -87,12 +79,10 @@
      
    3.修改zabbix_agentd.conf 文件末尾增加自定义key
    
-       # 获取mysql版本
-       UserParameter=mysql.version,mysql -V
-       # 获取mysql性能指标,这个是上面定义好的脚本
-       UserParameter=mysql.status[*],/usr/local/zabbix/share/zabbix/alertscripts/chk_mysql.sh $1
-       # 获取mysql运行状态
-       UserParameter=mysql.ping,mysqladmin -uzabbix -pzabbix -P3306 -h127.0.0.1  ping | grep -c alive
+       UserParameter=mysql.version,mysql -V        # 获取mysql版本
+       UserParameter=mysql.status[*],/usr/local/zabbix/share/zabbix/alertscripts/chk_mysql.sh $1    # 获取mysql性能指标
+       UserParameter=mysql.ping,mysqladmin -uzabbix -pzabbix -P3306 -h127.0.0.1  ping | grep -c alive # 获取mysql运行状态
+       
   4.重启zabbix_agentd 服务
   
   5.添加MYSQL模板 查看监控数据
