@@ -37,5 +37,8 @@
       Access        direct
       
    ![Zabbix]( https://github.com/shenyingkun/Linux-Zabbix-Grafana/blob/master/Grafana2.png )
+   
    5）测试连接->Success
+   
+   ![Zabbix]( https://github.com/shenyingkun/Linux-Zabbix-Grafana/blob/master/Grafana.png )
    
