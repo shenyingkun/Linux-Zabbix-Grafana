@@ -28,6 +28,7 @@
      /var/lib/grafana/plugins目录
      
    3）在web 插件管理页面开启zabbix 插件
+   
    4）配置 Data Sources数据源
      
       Name          test #自定义
