@@ -1,11 +1,11 @@
 ## Zabbix监控MySQL服务
 
-   1) 创建监控脚本 chk_mysql.sh
+   1.创建监控脚本 chk_mysql.sh
    
     cd  /usr/local/zabbix/share/zabbix/alertscripts
     touch chk_mysql.sh
     
-   2）添加脚本内容
+   2.添加脚本内容
    
     #!/bin/bash
 
@@ -85,7 +85,7 @@
         ;; 
      esac
      
-   3）修改zabbix_agentd.conf 文件末尾增加自定义key
+   3.修改zabbix_agentd.conf 文件末尾增加自定义key
    
        # 获取mysql版本
        UserParameter=mysql.version,mysql -V
@@ -93,6 +93,6 @@
        UserParameter=mysql.status[*],/usr/local/zabbix/share/zabbix/alertscripts/chk_mysql.sh $1
        # 获取mysql运行状态
        UserParameter=mysql.ping,mysqladmin -uzabbix -pzabbix -P3306 -h127.0.0.1  ping | grep -c alive
-  4）重启zabbix_agentd 服务
+  4.重启zabbix_agentd 服务
   
-  5）添加MYSQL模板 查看监控数据
+  5.添加MYSQL模板 查看监控数据
