@@ -35,6 +35,6 @@
       Type          Zabbix
       Url           http://ZabbixServerIP/zabbix/api_jsonrpc.php
       Access        direct
-      
+      ![Zabbix]( https://github.com/shenyingkun/Linux-Zabbix-Grafana/blob/master/Grafana2.png )
    5）测试连接->Success
    
