@@ -194,7 +194,14 @@ Zabbix 对PHP的要求最低为5.4，故需要将PHP升级到5.4以上
     chkconfig httpd on
     chkconfig zabbix_server on
     chkconfig zabbix_agent on
-
+    
+    错误1
+     Starting zabbix_server:  /usr/local/zabbix/sbin/zabbix_server: error while loading shared libraries: libpcre.so.1: cannot open shared    object file: No such file or directory
+     vim /etc/ld.so.conf
+     加入
+    /usr/local/lib
+    [root@zabbix_server sbin]# ldconfig
+    重试
 ## (9)在web页面配置zabbixserver
 
 用浏览器访问 http://192.168.190.133/zabbix/
