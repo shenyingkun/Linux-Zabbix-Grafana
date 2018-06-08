@@ -113,18 +113,27 @@ Zabbix 对PHP的要求最低为5.4，故需要将PHP升级到5.4以上
 
 报错1：configure: error: Unable to use libpcre (libpcre check failed)
 
-    yum -y install pcre* 安装即可解决（64位Linux需安装x86版本）
-    或
-    rpm -ivh --nodeps libevent-devel-1.4.13-4.el6.x86_64.rpm
-    rpm -ivh --nodeps libevent-headers-1.4.13-4.el6.noarch
+    yum -y install pcre* 
+ 
+ 或安装 pcre库，
+
+     tar –zxvf pcre-8.36.tar.gz
+     cd pcre-8.36
+     ./configure 
+     make&make install
 
 错误2：configure: error: Not found mysqlclient library
 
-yum install mysql-devel 安装即可解决
+     yum install mysql-devel 
 
 错误3：configure: error : Not found NET-SNMP library
 
-yum install net-snmp-devel 安装即可解决
+     yum install net-snmp-devel 
+
+报错4：Unable to use libevent (libevent check failed)
+
+    rpm -ivh --nodeps libevent-devel-1.4.13-4.el6.x86_64.rpm
+    rpm -ivh --nodeps libevent-headers-1.4.13-4.el6.noarch
 
 ## (6)按顺序导入zabbix库
 
