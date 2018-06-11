@@ -1,5 +1,8 @@
 
 # Zabbix Agent 内网安装部署
+## 首先关闭防火墙和seLinux
+    service iptables stop
+    chkconfig iptables off
 
 ## （1）安装依赖包
 
@@ -61,5 +64,17 @@
     chmod +x /etc/init.d/zabbix_*
     
     sed -i "s@BASEDIR=/usr/local@BASEDIR=/usr/local/zabbix@g" /etc/init.d/zabbix_agentd
-    
+
+## （4）启动agentd
+
     /etc/init.d/zabbix_agent start 
+    
+错误1
+
+      Starting zabbix_server:  /usr/local/zabbix/sbin/zabbix_server: error while loading shared libraries: libpcre.so.1: cannot open shared    object file: No such file or directory
+      
+     vim /etc/ld.so.conf
+     /usr/local/lib  ## 加入
+
+    [root@zabbix_server sbin]# ldconfig
+重试
