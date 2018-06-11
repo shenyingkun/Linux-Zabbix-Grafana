@@ -172,7 +172,7 @@ Zabbix 对PHP的要求最低为5.4，故需要将PHP升级到5.4以上
     mkdir /etc/zabbix/alertscripts
     mkdir /etc/zabbix/externalscripts
     ln -s /usr/local/zabbix/sbin/* /usr/sbin/
-    cp /home/sources/zabbix-3.0.3/misc/init.d/Fedora/core/zabbix_* /etc/init.d/  #复制服务启动脚本
+    cp /zabbix-3.0.3/misc/init.d/Fedora/core/zabbix_* /etc/init.d/  #复制服务启动脚本
     chmod +x /etc/init.d/zabbix_*
     sed -i "s@BASEDIR=/usr/local@BASEDIR=/usr/local/zabbix@g" /etc/init.d/zabbix_server
     sed -i "s@BASEDIR=/usr/local@BASEDIR=/usr/local/zabbix@g" /etc/init.d/zabbix_agent
@@ -185,7 +185,7 @@ Zabbix 对PHP的要求最低为5.4，故需要将PHP升级到5.4以上
     
     创建目录
     mkdir -p /var/www/html/zabbix
-    cp -r /home/sources/zabbix-3.0.3/frontends/php/* /var/www/html/zabbix/
+    cp -r /zabbix-3.0.3/frontends/php/* /var/www/html/zabbix/
     chown -R apache.apache /var/www/html/zabbix/
     chkconfig zabbix_server on
     /etc/init.d/zabbix_server start
