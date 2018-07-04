@@ -71,22 +71,12 @@ Zabbix 对PHP的要求最低为5.4，故需要将PHP升级到5.4以上
     
     /usr/bin/php &  #启动服务
 
-## （3）安装mysql
+## （3）安装mysql 系统安装的时候可以提前把MySQL安装上，或者制作安装源在线安装
 
-系统安装的时候可以提前把MySQL安装上
-
-或者在线下载安装
-
-    rpm -ivh http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
-    yum install -y mysql-server mysql-devel
-    useradd mysql  #创建mysql用户
-    mkdir -p /data/mysql #创建数据目录
-    chown -R mysql:mysql /data/mysql/
-    sed -i 's#^datadir=#datadir=/data/mysql#' /etc/init.d/mysqld
-    service mysqld start  #测试启动MySQL服务
-    service mysqld stop 
-    mysql_install_db  --user=mysql --data=/data/mysql #初始化mysql
+    yum -y install mysql-5 mysql-connector-odbc mysql-libs mysql-server libdbi-dbd-mysql mysql-connector-java mysql-bench mysql-test mysql-devel
+    
     service mysqld start  #启动mysql
+    
     chkconfig mysqld on
 
 ## (4) 在mysql中创建zabbix所需要的库和用户
@@ -127,7 +117,7 @@ Zabbix 对PHP的要求最低为5.4，故需要将PHP升级到5.4以上
      tar –zxvf pcre-8.36.tar.gz
      cd pcre-8.36
      ./configure 
-     make&make install
+     make&&make install
 
 错误2：configure: error: Not found mysqlclient library
 
@@ -141,6 +131,7 @@ Zabbix 对PHP的要求最低为5.4，故需要将PHP升级到5.4以上
 
     rpm -ivh --nodeps libevent-devel-1.4.13-4.el6.x86_64.rpm
     rpm -ivh --nodeps libevent-headers-1.4.13-4.el6.noarch
+    rpm -ivh --nodeps libevent-doc-1.4.13-4.el6.noarch.rpm
 
 ## (6)按顺序导入zabbix库
 
@@ -151,7 +142,7 @@ Zabbix 对PHP的要求最低为5.4，故需要将PHP升级到5.4以上
 
 ## （7）配置zabbix_server
 
-    vim /etc/zabbix/zabbix_server.conf
+    vi /etc/zabbix/zabbix_server.conf
     DBHost=localhost  #//数据库ip地址
     DBName=zabbix #//
     DBUser=zabbix #//
@@ -185,7 +176,7 @@ Zabbix 对PHP的要求最低为5.4，故需要将PHP升级到5.4以上
     sed -i "s@BASEDIR=/usr/local@BASEDIR=/usr/local/zabbix@g" /etc/init.d/zabbix_agentd
 ## （8）配置web
 
-    vim /etc/httpd/conf/httpd.conf
+    vi /etc/httpd/conf/httpd.conf
     添加
     ServerName 127.0.0.1
     DocumentRoot  "/var/www/html"
@@ -194,7 +185,7 @@ Zabbix 对PHP的要求最低为5.4，故需要将PHP升级到5.4以上
     mkdir -p /var/www/html/zabbix
     cp -r /zabbix-3.0.3/frontends/php/* /var/www/html/zabbix/
     chown -R apache.apache /var/www/html/zabbix/
-    chkconfig zabbix_server on
+    启动
     /etc/init.d/zabbix_server start
     /etc/init.d/zabbix_agentd start
     service httpd restart
